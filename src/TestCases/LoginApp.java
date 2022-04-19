@@ -3,6 +3,7 @@ package TestCases;
 
 import ObjectRepository.RediffHomePage;
 import ObjectRepository.RediffLoginPage;
+import ObjectRepository.RediffLoginPagePF;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,6 +16,24 @@ public class LoginApp {
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://mail.rediff.com/cgi-bin/login.cgi");
 		RediffLoginPage rediffLoginPage = new RediffLoginPage(driver);
+		rediffLoginPage.getEmail().sendKeys("username");
+		rediffLoginPage.getPassword().sendKeys("password");
+		rediffLoginPage.getSignIn().click();
+		rediffLoginPage.getHome().click();
+
+		RediffHomePage rediffHomePage = new RediffHomePage(driver);
+		rediffHomePage.getSearch().sendKeys("search");
+		rediffHomePage.getSubmitSearch().click();
+
+		driver.quit();
+	}
+
+	@Test
+	public void loginPF() {
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://mail.rediff.com/cgi-bin/login.cgi");
+		RediffLoginPagePF rediffLoginPage = new RediffLoginPagePF(driver);
 		rediffLoginPage.getEmail().sendKeys("username");
 		rediffLoginPage.getPassword().sendKeys("password");
 		rediffLoginPage.getSignIn().click();
